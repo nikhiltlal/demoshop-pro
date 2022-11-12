@@ -213,4 +213,4 @@ AWS_STORAGE_BUCKET_NAME = 'proshop-bucket01'
 
 
 if os.getcwd() == '/app':
-    DEBUG = False
+    DEBUG = True
