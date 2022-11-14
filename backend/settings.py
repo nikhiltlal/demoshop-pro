@@ -202,4 +202,4 @@ MEDIA_URL = '/media/'  # or any prefix you choose
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 if os.getcwd() == '/app':
-    DEBUG = False
+    DEBUG = True
