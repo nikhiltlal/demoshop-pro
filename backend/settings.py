@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'storages',
+    'cloudinary_storage',
+    'cloudinary',
 
     'base.apps.BaseConfig',
 ]
@@ -120,35 +123,20 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': '8Kg95nZQbwOXVzXqo8Is',
+#         'HOST': 'containers-us-west-113.railway.app',
+#         'PORT': '8061',
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'proshop',
-        'USER': 'Nikhil',
-        'PASSWORD': os.environ.get('DB_PASS'),
-        'HOST': 'proshop-identifier.chxwhcr9lszz.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
-    }
-}
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'proshop',
-#        'USER': 'dennisivy',
-#        'PASSWORD': os.environ.get('DB_PASS'),
-#        'HOST': os.environ.get('HOST'),
-#        'PORT': '5432'
-#    }
-# }
+DATABASES = {'default': dj_database_url.config(
+    default='postgres://nikhil:Swsl9v6aqF5fhTWrXsubK7req2CzpdQA@dpg-cdp1l3arrk05dt3lrgtg-a.frankfurt-postgres.render.com/proshop')}
 
 
 # Password validation
@@ -203,14 +191,15 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Dont forget to reset database connection and hide password
-AWS_QUERYSTRING_AUTH = False
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dkuwkogng',
+    'API_KEY': '881434648919295',
+    'API_SECRET': '8QEd2L9biADj4ZXk4Cyzpy09KiY'
+}
 
-AWS_STORAGE_BUCKET_NAME = 'proshop-bucket01'
-
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 if os.getcwd() == '/app':
     DEBUG = False
