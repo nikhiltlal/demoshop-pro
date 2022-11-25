@@ -193,7 +193,7 @@ function OrderScreen({ match, history }) {
                                             ) : (
                                                     <PayPalButton
                                                         amount={order.totalPrice}
-                                                        currency = 'GBP'
+						    	                        currency="GBP"
                                                         onSuccess={successPaymentHandler}
                                                     />
                                                 )}
