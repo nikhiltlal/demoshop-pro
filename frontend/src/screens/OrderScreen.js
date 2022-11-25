@@ -158,7 +158,7 @@ function OrderScreen({ match, history }) {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Items:</Col>
-                                            <Col>${order.itemsPrice}</Col>
+                                            <Col>£{order.itemsPrice}</Col>
                                         </Row>
                                     </ListGroup.Item>
 
@@ -193,6 +193,7 @@ function OrderScreen({ match, history }) {
                                             ) : (
                                                     <PayPalButton
                                                         amount={order.totalPrice}
+                                                        currency = 'GBP'
                                                         onSuccess={successPaymentHandler}
                                                     />
                                                 )}

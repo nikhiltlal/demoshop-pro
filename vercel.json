@@ -1,10 +1,35 @@
+
 {
+    "build": {
+        "env": {
+        "SECRET_KEY": "SECRET_KEY",
+        "DEBUG": "True",
+        "DB_HOST": "DB_HOST",
+        "DB_NAME": "DB_NAME",
+        "DB_USER": "DB_NAME",
+        "DB_PORT": "DB_PORT",
+        "DB_PASSWORD": "DB_PASSWORD"
+        }
+    },
     "builds": [{
         "src": "backend/wsgi.py",
-        "use": "@ardnt/vercel-python-wsgi",
-        "config": { "maxLambdaSize": "15mb" }
-    }],
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb",
+                    "runtime": "python3.9" }
+    },
+    {
+        "src": "build.sh",
+        "use": "@vercel/static-build",
+        "config":{
+            "distDir":"staticfiles"
+        }
+    }]
+    ,
     "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
         {
             "src": "/(.*)",
             "dest": "backend/wsgi.py"

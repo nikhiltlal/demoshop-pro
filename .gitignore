@@ -1,2 +1,5 @@
 myenv/
 .vercel
+*.env
+bin/
+lib/
